@@ -1,0 +1,36 @@
+
+<div class="body">
+  <h2>UPLOAD VESSEL DATA</h2>
+  <div class="container">
+    
+    <input type="file" (change)="onFileChange($event)" accept=".csv">
+   <!-- <button (click)="uploadFile()" class="button" [disabled]="!selectedFile">Preview</button>-->
+    <button (click)="resetUpload()" class="button">Reset</button>
+    
+  </div>
+  <div *ngIf="csvData.length > 0" class="container">
+    <table class="csv-table">
+      <!-- Table header -->
+      <thead>
+        <tr>
+          <th *ngFor="let header of tableHeaders">{{ header }}</th>
+        </tr>
+      </thead>
+      <!-- Table data -->
+      <tr *ngFor="let dataRow of csvData">
+        <td *ngFor="let header of tableHeaders">{{ dataRow[header] }}</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="csvData.length === 0" class="no-data-container">
+    <p class="no-data-message">No data available.</p>
+  </div>
+  <div class=" container"> 
+    <button (click)="submitData()" class="button">Submit</button>
+  <button (click)="reDirect()" class="button">Cancel</button>
+</div>
+</div>
+
+
+
+

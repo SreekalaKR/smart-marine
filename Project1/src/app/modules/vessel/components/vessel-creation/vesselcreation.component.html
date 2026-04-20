@@ -1,0 +1,445 @@
+<div class="container clearfix">
+  <h2>CREATE VESSEL</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="left-column">
+      <!-- IMO NUMBER -->
+      <div class="left-column-labels">
+
+        <label for="vesselNo" class="label">IMO NUMBER<span class="required">*</span></label>
+        <div class="left-column-fields">
+          <input
+            type="text"
+            id="vesselNo"
+            name="vesselNo"
+            class="input-field"
+            formControlName="vesselNo"
+            required
+            pattern="[0-9]+"
+            title="Please enter numbers only"
+            (focus)="setFieldTouched('vesselNo')"
+            (blur)="validateFields()"
+          />
+          
+          <div class="error" *ngIf="(registerForm.controls['vesselNo'].touched || submitted) && 
+          registerForm.controls['vesselNo'].errors?.['required']">
+            Enter a valid IMO number.
+          </div>
+          <div class="error" *ngIf="registerForm.get('vesselNo')?.hasError('duplicateVesselNo')">
+            Vessel No is already in use for this company code.
+          </div>
+        </div>
+      </div>
+
+      <!-- FLAG -->
+      <div class="left-column-labels">
+        <label for="vesselFlag" class="label"
+          >FLAG<span class="required">*</span></label
+        >
+        <div class="left-column-fields">
+          <select
+            id="vesselFlag"
+            name="vesselFlag"
+            class="input-field select-field"
+            formControlName="vesselFlag"
+            (focus)="setFieldTouched('vesselFlag')"
+            (blur)="validateFields()"
+          >
+            <option *ngFor="let option of dropdownOptions" [value]="option.key">
+              {{ option.value }}
+            </option>
+          </select>
+          <div
+            class="error"
+            *ngIf="(registerForm.controls['vesselFlag'].touched || submitted) && registerForm.controls['vesselFlag'].errors?.['required']"
+          >
+            Flag is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- VESSEL NAME -->
+      <div class="left-column-labels">
+        <label for="vesselName" class="label"
+          >VESSEL NAME<span class="required">*</span></label
+        >
+        <div class="left-column-fields">
+          <input
+            type="text"
+            id="vesselName"
+            name="vesselName"
+            class="input-field"
+            formControlName="vesselName"
+            (focus)="setFieldTouched('vesselName')"
+            (blur)="validateFields()"
+          />
+          <div
+            class="error"
+            *ngIf="(registerForm.controls['vesselName'].touched || submitted) && registerForm.controls['vesselName'].errors?.['required']"
+          >
+            Vessel name is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- OWNER CONTACT DETAILS -->
+      <div class="left-column-labels">
+        <label for="ownerContactDetails" class="label"
+          >OWNER CONTACT DETAILS</label
+        >
+        <div class="left-column-fields">
+          <input
+            type="text"
+            id="ownerContactDetails"
+            name="ownerContactDetails"
+            formControlName="ownerContactDetails"
+            class="input-field"
+            (focus)="setFieldTouched('ownerContactDetails')"
+            (blur)="validateFields()"
+          />
+        </div>
+      </div>
+
+      <!-- OPERATOR NAME-->
+      <div class="left-column-labels">
+        <label for="operatorName" class="label">OPERATOR NAME</label>
+        <div class="left-column-fields">
+          <input
+            type="text"
+            id="operatorName"
+            name="operatorName"
+            formControlName="operatorName"
+            class="input-field"
+            (focus)="setFieldTouched('operatorName')"
+            (blur)="validateFields()"
+          />
+        </div>
+      </div>
+
+      <!-- OPERATOR BU EMAIL -->
+      <div class="left-column-labels">
+        <label for="operatorBuEmail" class="label">OPERATOR BU EMAIL</label>
+        <div class="left-column-fields">
+          <select
+            id="operatorBuEmail"
+            name="operatorBuEmail"
+            formControlName="operatorBuEmail"
+            class="input-field"
+            (focus)="setFieldTouched('operatorBuEmail')"
+            (blur)="validateFields()"
+            
+          >
+            <option value=""></option>
+            <option value="Be1">e1@gmail.com</option>
+            <option value="Be2">e2@gmail.com</option>
+            <option value="Be3">e3@gmail.com</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- OWNERSHIP STATUS -->
+
+      <div class="left-column-labels">
+        <label for="ownershipStatus" class="label"
+          >OWNERSHIP STATUS<span class="required">*</span></label
+        >
+        <div class="left-column-fields">
+          <select
+            id="ownershipStatus"
+            name="ownershipStatus"
+            formControlName="ownershipStatus"
+            class="input-field"
+            required
+            (focus)="setFieldTouched('ownershipStatus')"
+            (blur)="validateFields()"
+          >
+            <option value="">Chartered</option>
+            <option value="TC">Time Chartered</option>
+            <option value="DC">Demise Chartered</option>
+            <option value="BC">Bareboat Chartered</option>
+            <option value="JO">Jointly Owned</option>
+            <option value="O">Owned</option>
+            <option value="SO">Shared Ownership</option>
+            <option value="PO">Publicly Owned</option>
+            <option value="PrO">Privately Owned</option>
+          </select>
+          <div
+            class="error"
+            *ngIf="(registerForm.controls['ownershipStatus'].touched || submitted) && registerForm.controls['ownershipStatus'].errors?.['required']"
+          >
+            Ownership Status is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- DEAD WEIGHT TONNAGE -->
+      <div class="left-column-labels">
+        <label for="dwt" class="label">DEAD WEIGHT TONNAGE</label>
+        <div class="left-column-fields">
+          <input
+            type="text"
+            id="dwt"
+            name="dwt"
+            class="input-field"
+            formControlName="dwt"
+            (focus)="setFieldTouched('dwt')"
+            (blur)="validateFields()"
+            
+          />
+        </div>
+      </div>
+
+      <!-- SISTER VESSELS -->
+      <div class="left-column-labels">
+        <label for="sisterVessels" class="label">SISTER VESSELS</label>
+        <div class="left-column-fields">
+          <select id="sisterVessels" name="sisterVessels"  formControlName="sisterVessels" class="input-field"
+          (focus)="setFieldTouched('sisterVessels')"
+          (blur)="validateFields()"
+          >
+            <option value=""></option>
+            <option value="sv1">sv1</option>
+            <option value="sv2">sv2</option>
+            <option value="sv3">sv3</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- INTERNAL ONLY -->
+      <div class="left-column-labels">
+        <label for="isInternalOnly" class="label">INTERNAL ONLY</label>
+        <label class="toggle-button">
+          <input
+            type="checkbox"
+            id="isInternalOnly"
+            name="isInternalOnly"
+            class="input-field"
+            formControlName="isInternalOnly"
+           
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <!-- VESSEL TYPE -->
+      <div class="right-column-labels">
+        <label for="vesselType" class="label"
+          >VESSEL TYPE<span class="required">*</span></label
+        >
+        <div class="right-column-fields">
+          <select
+            id="vesselType"
+            name="vesselType"
+            formControlName="vesselType"
+            class="input-field"
+            (focus)="setFieldTouched('vesselType')"
+            (blur)="validateFields()"
+          >
+            <option value=""></option>
+            <option value="C">Container</option>
+            <option value="LPG">LPG Container</option>
+            <option value="OT">Oil container</option>
+          </select>
+          <div
+            class="error"
+            *ngIf="(registerForm.controls['vesselType'].touched || submitted) && registerForm.controls['vesselType'].errors?.['required']"
+          >
+            Vessel type is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- VESSEL CLASS -->
+      <div class="right-column-labels">
+        <label for="vesselClass" class="label"
+          >VESSEL CLASS<span class="required">*</span></label
+        >
+        <div class="right-column-fields">
+          <select
+            id="vesselClass"
+            name="vesselClass"
+            formControlName="vesselClass"
+            class="input-field"
+            (focus)="setFieldTouched('vesselClass')"
+            (blur)="validateFields()"
+          >
+            <option value=""></option>
+            <option value="TC">Tanker Class</option>
+            <option value="BCC">Bulk Carrier Class</option>
+            <option value="CSC">Container Ship Class</option>
+            <option value="PSC">Passenger Ship Class</option>
+            <option value="OSVC">Offshore Support Vessel Class</option>
+            <option value="TC">Tugboat Class</option>
+            <option value="RVC">Research Vessel Class</option>
+            <option value="NSC">Naval Ship Class</option>
+          </select>
+          <div
+            class="error"
+            *ngIf="(registerForm.controls['vesselClass'].touched || submitted) && registerForm.controls['vesselClass'].errors?.['required']"
+          >
+            Vessel class is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- VESSEL EMAIL -->
+      <div class="right-column-labels">
+        <label for="masterEmail" class="label"
+          >VESSEL EMAIL<span class="required">*</span></label
+        >
+        <div class="right-column-fields">
+          <input
+            type="email"
+            id="masterEmail"
+            name="masterEmail"
+            formControlName="masterEmail"
+            class="input-field"
+            email
+            (focus)="setFieldTouched('masterEmail')"
+            (blur)="validateFields()"
+          />
+          <div
+            class="error"
+            *ngIf="(registerForm.controls['masterEmail'].touched || submitted) && registerForm.controls['masterEmail'].errors?.['invalidEmail']"
+          >
+            Vessel email is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPANY OWNER -->
+
+      <div class="right-column-labels">
+        <label for="ownerCompany" class="label">COMPANY OWNER</label>
+        <div class="right-column-fields">
+          <input
+            type="text"
+            id="ownerCompany"
+            formControlName="ownerCompany"
+            name="ownerCompany"
+            class="input-field"
+            (focus)="setFieldTouched('ownerCompany')"
+            (blur)="validateFields()"
+          />
+        </div>
+      </div>
+
+      <!-- OPERATOR EMAIL -->
+      <div class="right-column-labels">
+        <label for="operatorEmail" class="label">OPERATOR EMAIL</label>
+        <div class="right-column-fields">
+          <input
+            type="text"
+            id="operatorEmail"
+            name="operatorEmail"
+            formControlName="operatorEmail"
+            class="input-field"
+            (focus)="setFieldTouched('operatorEmail')"
+            (blur)="validateFields()"
+          />
+        </div>
+      </div>
+
+      <!-- PIC -->
+      <div class="right-column-labels">
+        <label for="pic" class="label">PIC</label>
+        <div class="right-column-fields">
+          <input type="text" id="pic" name="pic"  formControlName="pic" class="input-field" 
+          (focus)="setFieldTouched('pic')"
+          (blur)="validateFields()"/>
+        </div>
+      </div>
+
+      <!-- MARINE SHIP TYPE -->
+      <div class="right-column-labels">
+        <label for="marineShipType" class="label"
+          >MARINE SHIP TYPE<span class="required">*</span></label
+        >
+        <div class="right-column-fields">
+          <select
+            id="marineShipType"
+            name="marineShipType"
+            formControlName="marineShipType"
+            class="input-field"
+            (focus)="setFieldTouched('marineShipType')"
+            (blur)="validateFields()"
+          >
+            <option value=""></option>
+            <option value="NV">Naval Vessel</option>
+            <option value="F">Ferry</option>
+            <option value="RV">Research Vessel</option>
+            <option value="CS">Container Ship</option>
+            <option value="BC">Bulk Carrier</option>
+            <option value="T">Tanker</option>
+            <option value="PS">Passenger Ship</option>
+            <option value="OSV">Offshore Supply Vessel</option>
+            <option value="TUG">Tugboat</option>
+            <option value="FV">Fishing Vessel</option>
+          </select>
+          <div
+            class="error"
+            *ngIf="
+    
+  (registerForm.controls['marineShipType'].touched || submitted) && registerForm.controls['marineShipType'].errors?.['required']"
+          >
+            Marine Ship Type is required
+          </div>
+        </div>
+      </div>
+
+      <!-- EEOI ONLY -->
+      <div class="right-column-labels">
+        <label for="isEeoiOnly" class="label">EEOI ONLY</label>
+        <label class="toggle-button">
+          <input
+            type="checkbox"
+            id="isEeoiOnly"
+            name="isEeoiOnly"
+            formControlName="isEeoiOnly"
+            class="input-field"
+            
+            
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <!-- PERFORMANCE MODE -->
+      <div class="right-column-labels">
+        <label for="isPerfVsl" class="label">PERFORMANCE MODE</label>
+        <label class="toggle-button">
+          <input
+            type="checkbox"
+            id="isPerfVsl"
+            name="isPerfVsl"
+            formControlName="isPerfVsl"
+            class="input-field"
+           
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <!-- IS NEW VESSEL -->
+      <div class="right-column-labels">
+        <label for="isNewVessel" class="label">IS NEW VESSEL</label>
+        <div class="right-column-fields">
+          <input
+            type="checkbox"
+            id="isNewVessel"
+            name="isNewVessel"
+            class="input-field"
+            checked
+           
+          />
+        </div>
+      </div>
+      <!-- buttons -->
+
+      <div class="button-section ">
+        <button type="submit" class="submit-button" >Save</button>
+        <button (click)="reDirect()" class="cancel-button">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

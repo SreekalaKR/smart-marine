@@ -1,0 +1,122 @@
+h2 {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    color: #dbce10;
+    font-size: 24px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+
+
+.csv-table {
+    width: 95%;
+    border-collapse: collapse;
+    background-color: #192a56;
+    border: 1px solid #ccc;
+    /* Add this line to apply a border to the table */
+    margin: 0 auto;
+    /* Center the table horizontally */
+
+}
+
+.csv-table th,
+.csv-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+    width: 20%;
+    /* Adjust the percentage value as per your preference */
+}
+
+.csv-table th {
+    background-color: #192a56;
+}
+
+.csv-table th:first-child,
+.csv-table td:first-child {
+    border-left: none;
+}
+
+.csv-table th:last-child,
+.csv-table td:last-child {
+    border-right: none;
+}
+
+.csv-table tr:nth-child(even) {
+    background-color: #192a56;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #0b0747;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+
+}
+
+.button:hover {
+    background-color: #524bdf;
+}
+
+
+
+.container {
+
+    text-align: right;
+    justify-content: flex-end;
+    margin-right: 25px;
+
+}
+
+
+
+.btton-spacing {
+    margin-bottom: 20px;
+}
+
+.body {
+    background-color: #192a56;
+    color: #fff;
+}
+
+.btton {
+
+    background-color: #0b0747;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btton:hover {
+    background-color: #524bdf;
+}
+
+.btn.selected {
+    background-color: #524bdf;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #524bdf;
+}
+
+.no-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.no-data-message {
+    text-align: center;
+    font-size: 19px;
+    color: white;
+}

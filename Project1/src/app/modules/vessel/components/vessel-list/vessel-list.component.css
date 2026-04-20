@@ -1,0 +1,239 @@
+/* CSS for styling */
+h2 {
+  text-align: center;
+  color: yellow;
+  margin-top: 20px;
+
+}
+
+.vessel-table {
+  width: 95%;
+  border-collapse: collapse;
+  background-color: #192a56;
+  border: 1px solid #ccc;
+  /* Add this line to apply a border to the table */
+  margin: 0 auto;
+  /* Center the table horizontally */
+}
+
+.vessel-table th,
+.vessel-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+  width: 20%;
+  /* Adjust the percentage value as per your preference */
+}
+
+.vessel-table th {
+  background-color: #192a56;
+}
+
+.vessel-table th:first-child,
+.vessel-table td:first-child {
+  border-left: none;
+}
+
+.vessel-table th:last-child,
+.vessel-table td:last-child {
+  border-right: none;
+}
+
+.vessel-table tr:nth-child(even) {
+  background-color: #192a56;
+}
+
+.button:hover {
+  background-color: #524bdf;
+}
+
+.container {
+  display: flex;
+  height: 10;
+}
+
+.body {
+  flex: 1;
+  background-color: #192a56;
+  color: #fff;
+  margin-bottom: 20px;
+  /* Add space between .body and .vessel-table */
+  min-height: 100vh;
+
+}
+
+.button {
+  margin-right: 10px;
+  /* Add some spacing between the buttons */
+  padding: 10px 20px;
+  background-color: #0b0747;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btton:hover {
+  background-color: #524bdf;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+/* Add this to your CSS file or component's CSS */
+.scroll-container {
+  max-height: 400px;
+  /* Set a maximum height for Y scrollbar */
+  overflow-x: auto;
+  /* Enable horizontal scrollbar when content overflows */
+  overflow-y: auto;
+  /* Enable vertical scrollbar when content overflows */
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  /* Vertically center the icons */
+}
+
+.icon-container i {
+  margin-right: 20px;
+  /* Add margin to create space between the icons */
+}
+
+/* CSS for the message tooltips */
+.message {
+  position: absolute;
+  /* Changed from "calc()" to "relative" */
+  background-color: rgba(111, 102, 102, 0.7);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: none;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.icon-container:hover .message {
+  display: block;
+}
+
+.icon-container:hover .fa-pen-to-square,
+.icon-container:hover .fa-trash {
+  opacity: 0.5;
+}
+
+/* CSS for icon spacing */
+.icon-spacing {
+  margin-bottom: 30px;
+  width: 30px;
+  /* Adjust the spacing width as needed */
+  display: inline-block;
+}
+
+.pagination-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  z-index: 999;
+  margin-bottom: 30px;
+  /* Ensure it's above other content */
+}
+
+.pagination-container button {
+  margin: 0 5px;
+  padding: 10px 20px;
+}
+
+.page-info {
+  color: #fff;
+}
+
+.input-small {
+  width: 100px;
+  height: 20px;
+  font-size: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #9b9ba4;
+  color: #9b9ba4;
+  margin-top: 10px;
+  /* Adjust the width, height, font-size, and colors as needed */
+  /* Add any other styling properties you want */
+}
+
+.input-small::placeholder {
+  color: #9b9ba4;
+  /* Placeholder text color */
+}
+
+/* Style the company dropdown */
+.company-dropdown select {
+  width: 120px;
+  /* Adjust the width as needed */
+  padding: 5px;
+  font-size: 14px;
+  background-color: #0b0747;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #f1e9e9;
+
+
+}
+
+/* Style the dropdown options */
+.company-dropdown select option {
+  font-size: 12px;
+  background-color: #dad4d4;
+  color: #333;
+  margin-left: 10px;
+}
+
+/* Add a hover effect */
+.company-dropdown select:hover {
+  border-color: #007bff;
+  cursor: pointer;
+}
+
+.company-dropdown {
+  margin-left: 40px;
+}
+
+
+
+
+/*///////////////////////*/
+
+
+/* Add this CSS to your existing styles */
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-container .sort-icons {
+  margin-left: 10px;
+  /* Adjust the margin as needed */
+}
+
+.fa-sort-up:before {
+  content: "\f077";
+  /* FontAwesome up arrow icon */
+}
+
+.fa-sort-down:before {
+  content: "\f078";
+  /* FontAwesome down arrow icon */
+}

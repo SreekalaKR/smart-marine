@@ -1,0 +1,149 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<div class="body">
+    <h2>VESSEL LIST</h2>
+
+     <!-- Add a dropdown list for company code -->
+  <div class="company-dropdown">
+   <!--<label for="companyCode">Select Company:</label>--> 
+    <select [(ngModel)]="selectedCompanyCode" (change)="onCompanyChange()">
+        <option value="All">All</option>
+      <option value="Company1">Company1</option>
+      <option value="Company2">Company2</option>
+      <option value="Company3">Company3</option>
+      <option value="Company4">Company4</option>
+      <option value="BWDRY">BWDRY</option>
+    </select>
+  </div>
+
+ 
+    <div class="button-container">
+        <div class="container" *ngIf="selectedCompanyCode !== 'All'">
+            <button (click)="vesselCreation()" class="button"  [disabled]="!isCreateButtonEnabled">Create vesselDetails</button>
+        </div>
+        <div class="container">
+            <button (click)="downloadCsv()" class="button" [disabled]="selectedCompanyCode !== 'All' && !isDownloadButtonEnabled">Download</button>
+        </div>
+        <div class="container" class="container" *ngIf="selectedCompanyCode !== 'All'">
+            <button (click)="gotoUploadPage()" class="button" [disabled]="!isUploadButtonEnabled">Goto Upload</button>
+        </div>
+    </div>
+    <br>
+    <br>
+   
+  
+    <div class="scroll-container"> <!-- Add the scroll container here -->
+        <table class="vessel-table">
+            <thead>
+                <tr>
+                   
+                  <!-- Add search inputs for each column -->
+                  
+<th (click)="sortBy('vesselName')">
+    <div class="header-container">VESSEL NAME 
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'vesselName' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'vesselName' && sortOrder === 'desc'}"></i>
+</div>
+</div>
+<input type="text" [(ngModel)]="filterByVesselName"  class="input-small" placeholder="Search"/>
+    
+</th>
+<th (click)="sortBy('vesselNo')">
+    <div class="header-container">IMO
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'vesselNo' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'vesselNo' && sortOrder === 'desc'}"></i>
+    </div> 
+    </div>
+    <input type="text" [(ngModel)]="filterByIMO"   class="input-small" placeholder="Search"/></th>
+<th (click)="sortBy('vesselFlag')">
+    <div class="header-container">FLAG 
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'vesselFlag' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'vesselFlag' && sortOrder === 'desc'}"></i>
+    </div> 
+    </div>
+    <input type="text" [(ngModel)]="filterByFlag"  class="input-small" placeholder="Search"/></th>
+<th (click)="sortBy('vesselType')">
+    <div class="header-container">VESSEL TYPE
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'vesselType' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'vesselType' && sortOrder === 'desc'}"></i>
+    </div>  
+    </div>
+    <input type="text" [(ngModel)]="filterByVesselType"  class="input-small" placeholder="Search"/></th>
+<th (click)="sortBy('vesselClass')">
+    <div class="header-container">VESSEL CLASS 
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'vesselClass' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'vesselClass' && sortOrder === 'desc'}"></i>
+    </div>  
+</div>
+    <input type="text" [(ngModel)]="filterByVesselClass"  class="input-small" placeholder="Search"/></th>
+<th (click)="sortBy(' masterEmail')">
+    <div class="header-container">VESSEL EMAIL 
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'masterEmail' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'masterEmail' && sortOrder === 'desc'}"></i>
+    </div> </div> 
+    <input type="text" [(ngModel)]="filterByVesselEmail"  class="input-small" placeholder="Search"/></th>
+<th >EEOI </th>
+<th (click)="sortBy('ownershipStatus')">
+    <div class="header-container">OWNERSHIP STATUS 
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'ownershipStatus' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'ownershipStatus' && sortOrder === 'desc'}"></i>
+    </div> 
+    </div> <input type="text" [(ngModel)]="filterByOwnershipStatus"  class="input-small" placeholder="Search"/></th>
+<th (click)="sortBy('marineShipType')">
+    <div class="header-container">MARINE SHIP TYPE
+    <div class="sort-icons">
+        <i class="fa-solid fa-sort" [ngClass]="{'fa-sort-up': sortColumn === 'marineShipType' && sortOrder === 'asc', 'fa-sort-down': sortColumn === 'marineShipType' && sortOrder === 'desc'}"></i>
+    </div></div>
+     <input type="text" [(ngModel)]="filterByMarineShipType"  class="input-small" placeholder="Search"/></th>
+<th></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                      
+                <tr *ngFor="let vessel of getPageItems()">
+                   
+                <td >{{ vessel.vesselName }}</td>
+                <td >{{ vessel.vesselNo }}</td>
+                <td >{{ vessel.vesselFlag }}</td>
+                <td >{{ vessel.vesselType }}</td>
+                <td>{{ vessel.vesselClass }}</td>
+                <td >{{ vessel.masterEmail }}</td>
+                <td >{{ vessel.isEeoiOnly }}</td>
+                <td >{{ vessel.ownershipStatus }}</td>
+                <td >{{ vessel.marineShipType }}</td>
+
+                <td >
+            <div class="icon-container" >
+                <i class="fa-solid fa-pen-to-square" (click)="editVessel(vessel)" 
+                   (mouseover)="showEditMessage=true" 
+                   (mouseleave)="showEditMessage=false"></i>
+                <div class="message" *ngIf="showEditMessage">Edit</div>
+                
+               <span class="icon-spacing"></span>
+                
+                <i class="fa-solid fa-trash" (click)="Delete(vessel.vesselNo)" 
+                   (mouseover)="showDeleteMessage=true" 
+                   (mouseleave)="showDeleteMessage=false"></i>
+                <div class="message" *ngIf="showDeleteMessage">Delete </div>
+              </div>
+                
+                </td>
+                </tr>
+           
+            </tbody>
+        </table>
+      <!-- Add this section for pagination controls -->
+ <div class="pagination-container">
+    <button class="button" (click)="updateCurrentPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="button" (click)="updateCurrentPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+    </div> <!-- Close the scroll container --><br>
+    
+ 
+    
+</div>
+
