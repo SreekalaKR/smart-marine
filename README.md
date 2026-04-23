@@ -1,11 +1,9 @@
-# SmartMarine Application
-
-
 ## Technologies Used
 - Frontend: Angular, HTML, CSS  
 - Backend: Node.js  
 - Styling: CSS3  
 
+# SmartMarine Application
 ---
 
 ## About Project
