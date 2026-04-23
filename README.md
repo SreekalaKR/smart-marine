@@ -1,8 +1,3 @@
-## Technologies Used
-- Frontend: Angular, HTML, CSS  
-- Backend: Node.js  
-- Styling: CSS3  
-
 # SmartMarine Application
 ---
 
@@ -11,6 +6,13 @@ SmartMarine is a web-based application designed for vessel navigation and voyage
 It helps users create, manage, and track voyages efficiently with a structured navigation system.
 
 The system is mainly used in marine operations to plan routes, manage vessel details, and monitor voyage activities.
+
+---
+
+## Technologies Used
+- Frontend: Angular, HTML, CSS  
+- Backend: Node.js  
+- Styling: CSS3  
 
 ---
 
